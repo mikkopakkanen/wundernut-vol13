@@ -4,10 +4,12 @@ import { CalculateDist, Point } from "./Maze.js"
 export class Dragon {
   x: number
   y: number
+  start: Point
 
   constructor(row: number, col: number) {
     this.x = row
     this.y = col
+    this.start = new Point(row, col)
   }
 
   getCoords() {
@@ -30,6 +32,7 @@ export class Dragon {
     const pt = filteredPath[0].pt
     this.x = pt.x
     this.y = pt.y
+    game.dragonPath.push({ x: pt.x, y: pt.y })
   }
 
 }

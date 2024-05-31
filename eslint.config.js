@@ -15,6 +15,6 @@ export default [
       "indent": ["error", 2],
       "no-trailing-spaces": "error"
     },
-    files: ["src/**/*.ts"],
+    files: ["src/**/*.ts", "src/**/*.js"],
   }
 ]

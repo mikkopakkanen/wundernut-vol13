@@ -6,11 +6,13 @@ const CHECK_DRAGON_DIST = 3
 export class Player {
   x: number
   y: number
+  start: Point
   visitedCoords: boolean[][]
 
   constructor(row: number, col: number) {
     this.x = row
     this.y = col
+    this.start = new Point(row, col)
     this.visitedCoords = this.resetVisitedArray()
   }
 
@@ -49,6 +51,7 @@ export class Player {
     this.x = pt.x
     this.y = pt.y
     this.visitedCoords[pt.x][pt.y] = true
+    game.playerPath.push({ x: pt.x, y: pt.y })
     game.moves++
   }
 

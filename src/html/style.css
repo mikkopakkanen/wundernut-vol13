@@ -1,0 +1,28 @@
+#maze-container {
+  display: grid;
+  grid-template-columns: repeat(12, 40px); /* Adjust the size and number of columns based on the maze */
+  grid-template-rows: repeat(12, 40px); /* Adjust the size and number of rows based on the maze */
+  gap: 1px;
+}
+.cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+.wall {
+  background-color: black;
+}
+.path {
+  background-color: white;
+}
+.hero {
+  background-color: blue;
+  color: white;
+}
+.dragon {
+  background-color: red;
+  color: white;
+}
