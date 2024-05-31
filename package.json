@@ -1,0 +1,22 @@
+{
+  "name": "wundernut-vol13",
+  "author": "Mikko Pakkanen",
+  "description": "",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsc && node ./dist/app.js",
+    "lint": "eslint --fix"
+  },
+  "dependencies": {
+    "@types/browserify": "latest",
+    "browserify": "latest"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "eslint": "^9.3.0",
+    "globals": "^15.3.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.11.0"
+  }
+}
