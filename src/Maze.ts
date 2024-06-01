@@ -79,7 +79,9 @@ type CalculateDistResult = {
 }
 
 // Finds the shortest path between src cell and dest cell
-// Implements Lee algorithm (https://en.wikipedia.org/wiki/Lee_algorithm) which is based on breadth-first search
+// Implements Lee algorithm which is based on breadth-first search
+// https://en.wikipedia.org/wiki/Lee_algorithm
+// https://www.codesdope.com/blog/article/lee-algorithm/
 export const CalculateDist = (mat: (number)[][], src: Point, dest: Point): CalculateDistResult => {
   const rowNum = [-1, 0, 0, 1]
   const colNum = [0, -1, 1, 0]

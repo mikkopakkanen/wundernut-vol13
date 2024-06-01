@@ -71,16 +71,17 @@ export class Player {
   }
 
   // Calculates path to end & checks if Dragon exists on nearby tiles
-  // Change CHECK_DRAGON to change distance of how far tiles are checked for Dragon
+  // Change CHECK_DRAGON -> from how far Dragon is checked
   makeTurn(game: Game) {
     if(game.moves === 0) this.visitedCoords[game.player.x][game.player.y] = true // set source tile as visited
     let { path } = this.getDistanceToEnd(game)
     if(!path || path.length === 0) throw "Player: no path"
 
-    // keep only unvisited points which are CHECK_DRAGON_DIST away
+    // keep only unvisited points which are certain dist away
     path = path.filter(p => p.dist <= CHECK_DRAGON_DIST && !this.visitedCoords[p.pt.x][p.pt.y])
 
-    const nearbyDragonTiles = path.map(p => this.dragonNearby(game, p.pt) ? p : null).filter(p => p) // check if dragon is nearby
+    // check if dragon is nearby
+    const nearbyDragonTiles = path.map(p => this.dragonNearby(game, p.pt) ? p : null).filter(p => p)
 
     if(nearbyDragonTiles.length > 0)
       this.reCalcRoute(game, nearbyDragonTiles)

@@ -1,8 +1,10 @@
 const mazeContainer = document.getElementById("maze-container")
+const statsContainer = document.getElementById("stats")
 
 // Function to create the maze grid
 function createMaze(maze) {
   mazeContainer.innerHTML = ""
+  statsContainer.innerHTML = "Moves: 0"
   maze.forEach((row, rowIndex) => {
     row.forEach((cell, colIndex) => {
       const cellElement = document.createElement("div")
@@ -15,7 +17,9 @@ function createMaze(maze) {
         cellElement.classList.add("wall")
       }
       mazeContainer.appendChild(cellElement)
+      mazeContainer.style.gridTemplateColumns = `repeat(${colIndex+1}, 60px)`
     })
+    mazeContainer.style.gridTemplateRows = `repeat(${rowIndex+1}, 60px)`
   })
 }
 
@@ -46,6 +50,7 @@ function animate(heroPath, dragonPath, moves, i = 0) {
 
   placeCharacters()
   i++
+  statsContainer.innerHTML = `Moves: ${i}`
 
   if (i !== moves) {
     heroPath.shift()
@@ -56,10 +61,11 @@ function animate(heroPath, dragonPath, moves, i = 0) {
 
 async function init() {
   const data = await fetchAsync("/game")
-  const { matrix, heroStart, heroPath, dragonStart, dragonPath, moves } = data
+  const { matrix, heroStart, heroPath, dragonStart, dragonPath, moves, end } = data
   heroPosition = heroStart
   dragonPosition = dragonStart
   createMaze(matrix)
+  document.querySelector(`[data-row="${end.x}"][data-col="${end.y}"]`).classList.add("end")
   placeCharacters()
   setTimeout(() => animate(heroPath, dragonPath, moves, 0), 1000)
 }

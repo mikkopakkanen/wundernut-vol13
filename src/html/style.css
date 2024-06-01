@@ -1,8 +1,9 @@
 #maze-container {
   display: grid;
-  grid-template-columns: repeat(12, 60px); /* Adjust the size and number of columns based on the maze */
-  grid-template-rows: repeat(12, 60px); /* Adjust the size and number of rows based on the maze */
   gap: 1px;
+}
+#stats {
+  font-size: 32px
 }
 .cell {
   width: 60px;
@@ -18,13 +19,22 @@
 .path {
   background-color: #3cffad;
 }
+.end {
+  background-color: #3cffad;
+  color: white;
+}
+.end::before {
+  content: "❌";
+  color: black;
+  font-size: 20px;
+}
 .hero {
   background-color: #3cffad;
   color: white;
 }
 .hero::before {
   content: "🏃";
-  font-size: 40px;
+  font-size: 60px;
 }
 .dragon {
   background-color: #3cffad;
@@ -32,5 +42,5 @@
 }
 .dragon::before {
   content: "🐉";
-  font-size: 40px;
+  font-size: 60px;
 }

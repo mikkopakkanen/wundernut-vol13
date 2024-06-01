@@ -9,8 +9,7 @@ export const App = () => {
   let i = 0, endReached = false
   while(!endReached) {
     endReached = player.endReached(player.getCoords(), end)
-    if(i % 2 === 0)
-      player.makeTurn(game)
+    if(i % 2 === 0) player.makeTurn(game)
     else
       dragon.makeTurn(game)
     i++
