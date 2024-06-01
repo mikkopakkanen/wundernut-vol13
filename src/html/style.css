@@ -1,28 +1,36 @@
 #maze-container {
   display: grid;
-  grid-template-columns: repeat(12, 40px); /* Adjust the size and number of columns based on the maze */
-  grid-template-rows: repeat(12, 40px); /* Adjust the size and number of rows based on the maze */
+  grid-template-columns: repeat(12, 60px); /* Adjust the size and number of columns based on the maze */
+  grid-template-rows: repeat(12, 60px); /* Adjust the size and number of rows based on the maze */
   gap: 1px;
 }
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #ccc;
 }
 .wall {
-  background-color: black;
+  background-color: #a46953;
 }
 .path {
-  background-color: white;
+  background-color: #3cffad;
 }
 .hero {
-  background-color: blue;
+  background-color: #3cffad;
   color: white;
 }
+.hero::before {
+  content: "🏃";
+  font-size: 40px;
+}
 .dragon {
-  background-color: red;
+  background-color: #3cffad;
   color: white;
+}
+.dragon::before {
+  content: "🐉";
+  font-size: 40px;
 }

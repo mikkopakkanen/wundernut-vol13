@@ -27,8 +27,8 @@ let dragonPosition = { x: 0, y: 0 }
 function placeCharacters() {
   document.querySelector(".hero")?.classList.remove("hero")
   document.querySelector(".dragon")?.classList.remove("dragon")
-  document.querySelector(`[data-row="${heroPosition.y}"][data-col="${heroPosition.x}"]`).classList.add("hero")
-  document.querySelector(`[data-row="${dragonPosition.y}"][data-col="${dragonPosition.x}"]`).classList.add("dragon")
+  document.querySelector(`[data-row="${heroPosition.x}"][data-col="${heroPosition.y}"]`).classList.add("hero")
+  document.querySelector(`[data-row="${dragonPosition.x}"][data-col="${dragonPosition.y}"]`).classList.add("dragon")
 }
 
 async function fetchAsync (url) {
@@ -39,11 +39,10 @@ async function fetchAsync (url) {
 
 // Function to animate the movement
 function animate(heroPath, dragonPath, moves, i = 0) {
-  console.log(i)
-  heroPosition.x = heroPath[0].y
-  heroPosition.y = heroPath[0].x
-  dragonPosition.x = dragonPath[0].y
-  dragonPosition.y = dragonPath[0].x
+  heroPosition.x = heroPath[0].x
+  heroPosition.y = heroPath[0].y
+  dragonPosition.x = dragonPath[0].x
+  dragonPosition.y = dragonPath[0].y
 
   placeCharacters()
   i++
@@ -57,16 +56,12 @@ function animate(heroPath, dragonPath, moves, i = 0) {
 
 async function init() {
   const data = await fetchAsync("/game")
-  const { matrix, heroStart, heroPath, dragonStart, dragonPath, start, end, moves } = data
+  const { matrix, heroStart, heroPath, dragonStart, dragonPath, moves } = data
   heroPosition = heroStart
   dragonPosition = dragonStart
   createMaze(matrix)
-  placeCharacters(heroStart, dragonStart)
-  animate(heroPath, dragonPath, moves, 0)
+  placeCharacters()
+  setTimeout(() => animate(heroPath, dragonPath, moves, 0), 1000)
 }
 
-// Initialize the maze and characters
 init()
-createMaze()
-placeCharacters()
-animate()
