@@ -1,9 +1,10 @@
 import { Dragon } from "./Dragon.js"
 import { Player } from "./Player.js"
 import { DragonTile, ExitTile, PlayerTile, ValidTiles } from "./Inputs.js"
+import { Game } from "./Game.js"
 
-export const ROW = 12
-export const COL = 12
+export const ROW = 20
+export const COL = 20
 
 export class QueueNode {
   pt: Point
@@ -69,8 +70,8 @@ export const FormGameData = (input: string[][]): GameData => {
 }
 
 // Check whether given cell is a valid cell or not
-const IsValid = (row: number, col: number) => {
-  return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL)
+const IsValid = (game: Game, row: number, col: number) => {
+  return (row >= 0) && (row < game.rows) && (col >= 0) && (col < game.cols)
 }
 
 type CalculateDistResult = {
@@ -82,7 +83,8 @@ type CalculateDistResult = {
 // Implements Lee algorithm which is based on breadth-first search
 // https://en.wikipedia.org/wiki/Lee_algorithm
 // https://www.codesdope.com/blog/article/lee-algorithm/
-export const CalculateDist = (mat: (number)[][], src: Point, dest: Point): CalculateDistResult => {
+export const CalculateDist = (game: Game, src: Point, dest: Point): CalculateDistResult => {
+  const { matrix: mat } = game
   const rowNum = [-1, 0, 0, 1]
   const colNum = [0, -1, 1, 0]
 
@@ -90,8 +92,8 @@ export const CalculateDist = (mat: (number)[][], src: Point, dest: Point): Calcu
   if(mat[src.x][src.y]!=1 || mat[dest.x][dest.y] != 1)
     throw ("src and dest cells should have value 1")
 
-  const visited = new Array(ROW).fill(false).map(() => new Array(COL).fill(false))
-  const previous = new Array(ROW).fill(null).map(() => new Array(COL).fill(null))
+  const visited = new Array(game.rows).fill(false).map(() => new Array(game.cols).fill(false))
+  const previous = new Array(game.rows).fill(null).map(() => new Array(game.cols).fill(null))
 
   visited[src.x][src.y] = true // mark the source cell as visited
   const q = [] // create a queue for BFS
@@ -107,7 +109,8 @@ export const CalculateDist = (mat: (number)[][], src: Point, dest: Point): Calcu
     const curr: QueueNode = q.shift()! // dequeue the front cell
 
     // Dest reached, lets quit
-    const pt = curr.pt
+    const pt = curr?.pt
+    if(!pt) throw "No path available"
     if(pt.x == dest.x && pt.y == dest.y) {
       let current = new QueueNode(new Point(dest.x, dest.y), curr.dist + 1)
       while (current !== null) {
@@ -126,7 +129,7 @@ export const CalculateDist = (mat: (number)[][], src: Point, dest: Point): Calcu
       const col = pt.y + colNum[i]
 
       // if adjacent cell is valid, has path and not visited yet -> enqueue it
-      if (IsValid(row, col) && mat[row][col] == 1 && !visited[row][col]){
+      if (IsValid(game, row, col) && mat[row][col] == 1 && !visited[row][col]){
         visited[row][col] = true
         const Adjcell = new QueueNode(new Point(row,col), curr.dist + 1)
         q.push(Adjcell)

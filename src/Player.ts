@@ -29,7 +29,7 @@ export class Player {
   // Returns shortest path and distance Points to exit
   getDistanceToEnd(game: Game) {
     return CalculateDist(
-      game.matrix,
+      game,
       new Point(this.x, this.y),
       new Point(game.end.x, game.end.y)
     )

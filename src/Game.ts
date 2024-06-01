@@ -9,6 +9,8 @@ type Path = {
 
 export class Game {
   matrix: number[][]
+  rows: number
+  cols: number
   player: Player
   playerPath: Path[]
   dragon: Dragon
@@ -17,8 +19,10 @@ export class Game {
   end: Point
   moves: number
 
-  constructor(matrix: number[][], player: Player, dragon: Dragon, start: Point, end: Point, moves: number) {
+  constructor(matrix: number[][], rows: number, cols: number, player: Player, dragon: Dragon, start: Point, end: Point, moves: number) {
     this.matrix = matrix
+    this.rows = rows
+    this.cols = cols
     this.player = player
     this.playerPath = []
     this.dragon = dragon

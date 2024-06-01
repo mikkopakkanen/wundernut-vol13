@@ -18,7 +18,7 @@ export class Dragon {
 
   getDistanceToHero(game: Game) {
     return CalculateDist(
-      game.matrix,
+      game,
       new Point(this.x, this.y),
       new Point(game.player.x, game.player.y)
     )

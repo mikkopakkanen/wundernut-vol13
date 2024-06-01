@@ -5,7 +5,9 @@ import { Present } from "./Presentation.js"
 
 export const Solve = (input: string[][]) => {
   const { matrix, player, dragon, start, end } = FormGameData(input)
-  const game = new Game(matrix, player, dragon, start, end, 0)
+  const rows = matrix.length
+  const cols = matrix[0].length
+  const game = new Game(matrix, rows, cols, player, dragon, start, end, 0)
   let i = 0, endReached = false
   while(!endReached) {
     endReached = player.endReached(player.getCoords(), end)
