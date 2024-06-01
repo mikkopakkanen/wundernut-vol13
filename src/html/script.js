@@ -2,7 +2,7 @@ const mazeContainer = document.getElementById("maze-container")
 const statsContainer = document.getElementById("stats")
 
 // Function to create the maze grid
-function createMaze(maze) {
+function createMaze(maze, end) {
   mazeContainer.innerHTML = ""
   statsContainer.innerHTML = "Moves: 0"
   maze.forEach((row, rowIndex) => {
@@ -21,6 +21,7 @@ function createMaze(maze) {
     })
     mazeContainer.style.gridTemplateRows = `repeat(${rowIndex+1}, 60px)`
   })
+  document.querySelector(`[data-row="${end.x}"][data-col="${end.y}"]`).classList.add("end") // add end icon
 }
 
 // Initial Positions
@@ -38,6 +39,10 @@ function placeCharacters() {
 async function fetchAsync (url) {
   let response = await fetch(url)
   let data = await response.json()
+  if(response.status === 400) {
+    alert(data)
+    return response.status
+  }
   return data
 }
 
@@ -59,15 +64,24 @@ function animate(heroPath, dragonPath, moves, i = 0) {
   }
 }
 
-async function init() {
-  const data = await fetchAsync("/game")
-  const { matrix, heroStart, heroPath, dragonStart, dragonPath, moves, end } = data
-  heroPosition = heroStart
-  dragonPosition = dragonStart
-  createMaze(matrix)
-  document.querySelector(`[data-row="${end.x}"][data-col="${end.y}"]`).classList.add("end")
-  placeCharacters()
-  setTimeout(() => animate(heroPath, dragonPath, moves, 0), 1000)
+async function Present(next) {
+  let data
+
+  if(!next)
+    data = await fetchAsync("/game")
+  else
+    data = await fetchAsync("/newgame")
+
+  if(data !== 400) {
+    const { matrix, heroStart, heroPath, dragonStart, dragonPath, moves, end } = data
+    heroPosition = heroStart
+    dragonPosition = dragonStart
+
+    createMaze(matrix, end)
+    placeCharacters()
+
+    setTimeout(() => animate(heroPath, dragonPath, moves, 0), 1000)
+  }
 }
 
-init()
+Present()

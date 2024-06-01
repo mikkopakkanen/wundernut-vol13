@@ -1,10 +1,10 @@
 import { Game } from "./Game.js"
 import { FormGameData } from "./Maze.js"
-import { input2 } from "./Inputs.js"
+import { inputs } from "./Inputs.js"
 import { Present } from "./Presentation.js"
 
-export const App = () => {
-  const { matrix, player, dragon, start, end } = FormGameData(input2)
+export const Solve = (input: string[][]) => {
+  const { matrix, player, dragon, start, end } = FormGameData(input)
   const game = new Game(matrix, player, dragon, start, end, 0)
   let i = 0, endReached = false
   while(!endReached) {
@@ -16,7 +16,12 @@ export const App = () => {
   }
 
   console.log(`Hero reached the end! Total moves: ${game.moves}`)
-  Present(game)
+  return game
 }
 
-App()
+export const SolveAll = () => {
+  const games = inputs.map((input) => Solve(input))
+  Present(games)
+}
+
+SolveAll()
