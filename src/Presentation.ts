@@ -1,5 +1,6 @@
 import express from "express"
 import path from "path"
+import { exec } from "node:child_process"
 import { Game } from "./Game.js"
 
 const formRes = (game: Game) => {
@@ -50,4 +51,7 @@ export const Present = (games: Game[]) => {
     }
   })
   app.listen(3000, () => console.log("Presentation running on port 3000."))
+  const url = 'http://localhost:3000';
+  var start = (process.platform == 'darwin'? 'open': process.platform == 'win32'? 'start': 'xdg-open');
+  exec(start + ' ' + url);
 }
