@@ -27,6 +27,7 @@ There are 5 inputs in `./src/Inputs.ts` -> `input1` and `input2` are inputs give
 
 ![image](https://github.com/mikkopakkanen/wundernut-vol13/assets/77620621/776aaa5e-12c3-4992-ae57-bb5fde75ffad)
 
-![image](https://github.com/mikkopakkanen/wundernut-vol13/assets/77620621/88b3168c-a415-4aae-bc60-3fa2a6e42f67)
+![image](https://github.com/mikkopakkanen/wundernut-vol13/assets/77620621/81328b88-9514-4ccd-8e69-5c36dcebc46c)
+
 
 
