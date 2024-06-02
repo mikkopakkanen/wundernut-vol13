@@ -9,7 +9,10 @@
 <body>
     <div id="maze-container"></div>
     <div id="stats"></div>
-    <button onClick="Present(true)">Next game</button>
+    <button onClick="{ running = false; stopped = true; setTimeout(() => Present(), 500) }">Repeat</button>
+    <button onClick="{ if(running) stopped = true }">Stop</button>
+    <button onClick="{ stopped = true; setTimeout(() => Present('prev'), 500) }">Previous game</button>
+    <button onClick="{ stopped = true; setTimeout(() => Present('next'), 500) }">Next game</button>
     <script src="/script.js"></script>
 </body>
 </html>

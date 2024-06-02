@@ -1,6 +1,9 @@
 const mazeContainer = document.getElementById("maze-container")
 const statsContainer = document.getElementById("stats")
 
+let stopped = false
+let running = false
+
 // Function to create the maze grid
 function createMaze(maze, end) {
   mazeContainer.innerHTML = ""
@@ -17,9 +20,9 @@ function createMaze(maze, end) {
         cellElement.classList.add("wall")
       }
       mazeContainer.appendChild(cellElement)
-      mazeContainer.style.gridTemplateColumns = `repeat(${colIndex+1}, 60px)`
+      mazeContainer.style.gridTemplateColumns = `repeat(${colIndex+1}, 20px)`
     })
-    mazeContainer.style.gridTemplateRows = `repeat(${rowIndex+1}, 60px)`
+    mazeContainer.style.gridTemplateRows = `repeat(${rowIndex+1}, 20px)`
   })
   document.querySelector(`[data-row="${end.x}"][data-col="${end.y}"]`).classList.add("end") // add end icon
 }
@@ -39,15 +42,20 @@ function placeCharacters() {
 async function fetchAsync (url) {
   let response = await fetch(url)
   let data = await response.json()
-  if(response.status === 400) {
+  if(data === "First game reached" || data === "Last game reached") {
     alert(data)
-    return response.status
+    running = false
+    return 400
   }
   return data
 }
 
 // Function to animate the movement
 function animate(heroPath, dragonPath, moves, i = 0) {
+  if(stopped) {
+    running = false
+    return
+  }
   heroPosition.x = heroPath[0].x
   heroPosition.y = heroPath[0].y
   dragonPosition.x = dragonPath[0].x
@@ -61,16 +69,24 @@ function animate(heroPath, dragonPath, moves, i = 0) {
     heroPath.shift()
     dragonPath.shift()
     setTimeout(() => animate(heroPath, dragonPath, moves, i), 500) // Adjust speed of animation
+  } else {
+    running = false
   }
 }
 
-async function Present(next) {
+async function Present(show) {
+  if(running) return
+  running = true
+  stopped = false
   let data
 
-  if(!next)
+  if(!show) {
     data = await fetchAsync("/game")
-  else
-    data = await fetchAsync("/newgame")
+  } else if(show === "next") {
+    data = await fetchAsync("/next")
+  } else if(show === "prev") {
+    data = await fetchAsync("/prev")
+  }
 
   if(data !== 400) {
     const { matrix, heroStart, heroPath, dragonStart, dragonPath, moves, end } = data

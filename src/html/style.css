@@ -3,11 +3,11 @@
   gap: 1px;
 }
 #stats {
-  font-size: 32px
+  font-size: 24px
 }
 .cell {
-  width: 60px;
-  height: 60px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +26,7 @@
 .end::before {
   content: "❌";
   color: black;
-  font-size: 20px;
+  font-size: 10px;
 }
 .hero {
   background-color: #3cffad;
@@ -34,7 +34,7 @@
 }
 .hero::before {
   content: "🏃";
-  font-size: 60px;
+  font-size: 20px;
 }
 .dragon {
   background-color: #3cffad;
@@ -42,5 +42,5 @@
 }
 .dragon::before {
   content: "🐉";
-  font-size: 60px;
+  font-size: 20px;
 }

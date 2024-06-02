@@ -25,17 +25,28 @@ export const Present = (games: Game[]) => {
     res.sendFile(path.join(__dirname, "/src/html/index.html"))
   })
   app.get("/game", (req, res) => {
-    res.send(formRes(games[0]))
-    gameOrderNum++
+    res.send(formRes(games[gameOrderNum]))
   })
-  app.get("/newgame", (req, res) => {
-    const game = games[gameOrderNum++]
+  app.get("/prev", (req, res) => {
+    gameOrderNum--
+    const game = games[gameOrderNum]
     if(game) {
       res.send(formRes(game))
     }
     else {
-      res.status(400)
-      res.send(JSON.stringify("End of games"))
+      gameOrderNum++
+      res.send(JSON.stringify("First game reached"))
+    }
+  })
+  app.get("/next", (req, res) => {
+    gameOrderNum++
+    const game = games[gameOrderNum]
+    if(game) {
+      res.send(formRes(game))
+    }
+    else {
+      gameOrderNum--
+      res.send(JSON.stringify("Last game reached"))
     }
   })
   app.listen(3000, () => console.log("Presentation running on port 3000."))
