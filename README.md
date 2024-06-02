@@ -4,7 +4,7 @@ My participation for Wundernut coding challenge Vol 13: https://github.com/wunde
 
 Utilizes [Lee Algorithm](https://en.wikipedia.org/wiki/Lee_algorithm) in search of the shortest path from source point to destination point in 2D binary array. Both Dragon and Hero movement is based on this
 
-## Install & run:
+## Install & run
 
 ```
 git clone https://github.com/mikkopakkanen/wundernut-vol13.git
