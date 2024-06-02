@@ -1,5 +1,5 @@
 import { Game } from "./Game.js"
-import { CalculateDist, Point, QueueNode, ROW, COL } from "./Maze.js"
+import { CalculateDist, Point, QueueNode } from "./Maze.js"
 
 const CHECK_DRAGON_DIST = 3
 
@@ -13,12 +13,17 @@ export class Player {
     this.x = row
     this.y = col
     this.start = new Point(row, col)
-    this.visitedCoords = this.resetVisitedArray()
+    this.visitedCoords = new Array().map(() => new Array())
   }
 
   // Returns Hero's current coords as Point
   getCoords() {
     return new Point(this.x, this.y)
+  }
+
+  // Sets this.visitedCoords
+  initVisitedCoords(rows: number, cols: number) {
+    this.visitedCoords = new Array(rows).fill(false).map(() => new Array(cols).fill(false))
   }
 
   // Checks if given Point equals to dest Point
@@ -35,14 +40,9 @@ export class Player {
     )
   }
 
-  // Returns boolean[][] arr with false values
-  resetVisitedArray() {
-    return new Array(ROW).fill(false).map(() => new Array(COL).fill(false))
-  }
-
   // Reset visited tiles and sets Hero's current location as visited
   resetVisitedTiles(game: Game) {
-    this.visitedCoords = this.resetVisitedArray()
+    this.visitedCoords = new Array(game.rows).fill(false).map(() => new Array(game.cols).fill(false))
     this.visitedCoords[game.player.x][game.player.y] = true // set current tile as visited
   }
 

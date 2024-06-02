@@ -3,9 +3,6 @@ import { Player } from "./Player.js"
 import { DragonTile, ExitTile, PlayerTile, ValidTiles } from "./Inputs.js"
 import { Game } from "./Game.js"
 
-export const ROW = 20
-export const COL = 20
-
 export class QueueNode {
   pt: Point
   dist: number
