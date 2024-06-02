@@ -1,5 +1,5 @@
 export const ValidTiles = ["🟩", "❎", "🏃"]
-export const InvalidTiles = ["🟫", "❎"]
+export const InvalidTiles = ["🟫"]
 
 export const PlayerTile = ["🏃"]
 export const DragonTile = ["🐉"]
