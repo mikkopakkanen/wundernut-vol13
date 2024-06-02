@@ -21,7 +21,7 @@ Presentation will show the maze solving step by step and number of movements mad
 
 There are 5 inputs in `./src/Inputs.ts` -> `input1` and `input2` are inputs given on challenge page and rest 3 added by me. Inputs can be easily added, just add new const and add it to exported array
 
-## Screenshot
+## Screenshots
 
 ![image](https://github.com/mikkopakkanen/wundernut-vol13/assets/77620621/d8c41318-8db1-4a85-ae9b-978b954d22de)
 
