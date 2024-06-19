@@ -71,7 +71,7 @@ export class Player {
   }
 
   // Calculates path to end & checks if Dragon exists on nearby tiles
-  // Change CHECK_DRAGON -> from how far Dragon is checked
+  // Change CHECK_DRAGON_DIST -> change how far away Dragon is checked
   makeTurn(game: Game) {
     if(game.moves === 0) this.visitedCoords[game.player.x][game.player.y] = true // set source tile as visited
     let { path } = this.getDistanceToEnd(game)
